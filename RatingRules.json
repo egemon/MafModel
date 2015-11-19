@@ -1,0 +1,92 @@
+{
+    "rules":[
+        {
+            "condition": {
+                "player": {
+                    "role": "r"
+                },
+                "metadata": {
+                    "win": "city"
+                }
+            },
+            "value": 3
+        },{
+            "condition": {
+                "player": {
+                    "role": "r"
+                },
+                "metadata": {
+                    "win": "maf"
+                }
+            },
+            "value": 0
+        },{
+            "condition": {
+                "player": {
+                    "role": "s"
+                },
+                "metadata": {
+                    "win": "city"
+                }
+            },
+            "value": 4
+        },{
+            "condition": {
+                "player": {
+                    "role": "s"
+                },
+                "metadata": {
+                    "win": "maf"
+                }
+            },
+            "value": -1
+        },{
+            "condition": {
+                "player": {
+                    "role": "b"
+                },
+                "metadata": {
+                    "win": "city"
+                }
+            },
+            "value": 0
+        },{
+            "condition": {
+                "player": {
+                    "role": "b"
+                },
+                "metadata": {
+                    "win": "maf"
+                }
+            },
+            "value": 4
+        },{
+            "condition": {
+                "player": {
+                    "role": "d"
+                },
+                "metadata": {
+                    "win": "city"
+                }
+            },
+            "value": -1
+        },{
+            "condition": {
+                "player": {
+                    "role": "d"
+                },
+                "metadata": {
+                    "win": "maf"
+                }
+            },
+            "value": 5
+        },{
+            "condition": {
+                "player": {
+                    "BP": "on"
+                }
+            },
+            "value": 1
+        }
+    ]
+}
