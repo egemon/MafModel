@@ -14,6 +14,7 @@ var LocalGameStorage = function () {
 
     //GameRecord - object
     this.saveGame = function (GameRecord) {
+        console.log('[LGS-M] saveGame() game = ', GameRecord);
         var id = this.generateGameId(GameRecord.metadata);
         var isGameAlreadyExists = !!localStorage.getItem(id);
         if ( !isGameAlreadyExists ||
@@ -91,7 +92,7 @@ var LocalGameStorage = function () {
 
     this.isPeriodIncorrect = function (period) {
         return Number.isNaN(+period);
-    }
+    };
 
     //returns array of objects
     this.getGamesByPeriod = function (periodType, period) {
