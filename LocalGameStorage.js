@@ -17,24 +17,25 @@ var LocalGameStorage = function () {
         console.log('[LGS-M] saveGame() game = ', GameRecord);
         var id = this.generateGameId(GameRecord.metadata);
         var isGameAlreadyExists = !!localStorage.getItem(id);
-        if ( !isGameAlreadyExists ||
-             (isGameAlreadyExists && confirm('Do your wanna override game?'))
+        if ( !isGameAlreadyExists
+            // || (isGameAlreadyExists && confirm('Do your wanna override game?'))
            ) {
             localStorage.setItem(id, JSON.stringify(GameRecord));
         } else {
-            alert("Game wasn't saved! Please choose another date or number or Table.");
+            // alert("Game wasn't saved! Please choose another date or number or Table.");
+            console.warn('[LGS-M] This game already exists');
         }
     };
 
     this.saveGameArray = function (games) {
         if (!games.length) {
             console.warn('[LGS-M] saveGameArray() it"s not array or there in no games!', games);
-            alert("Couldn't save games!");
-            return;
+            return false;
         }
         for (var i = 0; i < games.length; i++) {
             this.saveGame(games[i]);
         }
+        return true;
     };
 
     // filterObject = {

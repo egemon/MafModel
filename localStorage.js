@@ -8,33 +8,41 @@ var localStorage = {
     keys: [],
 
     init: function () {
-        var games = JSON.parse(fs.readFileSync('games/games.json', 'utf8'));
-        this.length = games.length;
-        var i = 0;
-        for (var key in games) {
-            this.keys[i++] = games[key];
-        };
+        var gameFiles = fs.readdirSync('games');
+        console.log('[localStorage-M] init() gameFiles = ', gameFiles);
+        this.length = gameFiles.length;
+        for (var i = 0; i < gameFiles.length; i++) {
+            this.keys[i] = gameFiles[i].replace('.json', '');
+        }
+        console.log('[localStorage-M] init() gameFiles = ', this.keys);
     },
 
     getItem: function (id) {
         console.log('[localStorage-M] getItem', arguments);
-
-        var games = JSON.parse(fs.readFileSync('games/games.json', 'utf8'));
-        console.log('games = ', games);
-        return games[id];
+        var game;
+        try {
+            game = JSON.parse(fs.readFileSync('games/' + id + '.json', 'utf8'));
+        } catch(err) {
+            console.warn('[localStorage-M] getItem error', err);
+        }
+        console.log('games = ', game);
+        return game;
     },
 
     setItem: function (id, str) {
         console.log('[localStorage-M] setItem', arguments);
-        var games = JSON.parse(fs.readFileSync('games/games.json', 'utf8'));
-        console.log('[localStorage-M] setItem games in lS = ', games);
-        games[id] = str;
-        console.log('[localStorage-M] setItem games in lS after set = ', games);
-        fs.writeFileSync('games/games.json', JSON.stringify(games), 'utf8');
+        var game = {};
+        try {
+            game = JSON.parse(fs.readFileSync('games/' + id + '.json', 'utf8'));
+            console.warn('[localStorage-M] Item already exists! ', id);
+            fs.writeFileSync('games/' + id + '.json', JSON.stringify(str), 'utf8');
+        } catch(e) {
+            fs.writeFileSync('games/' + id + '.json', JSON.stringify(str), 'utf8');
+        }
     },
 
     key: function (i) {
-        this.init();
+        // this.init();
         return this.keys[i];
     }
 };
