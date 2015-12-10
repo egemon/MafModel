@@ -8,7 +8,7 @@ var localStorage = {
     keys: [],
 
     init: function () {
-        var gameFiles = fs.readdirSync('games');
+        var gameFiles = fs.readdirSync('data-base/games');
         console.log('[localStorage-M] init() gameFiles = ', gameFiles);
         this.length = gameFiles.length;
         for (var i = 0; i < gameFiles.length; i++) {
