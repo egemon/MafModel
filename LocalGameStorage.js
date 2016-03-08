@@ -69,7 +69,6 @@ var LocalGameStorage = function () {
                     if (filterObject.periodType === 'season' && this.isPeriodIncorrect(filterObject.period)) {
                         filterObject.period = this.seasonMap[filterObject.period];
                         if (this.isPeriodIncorrect(filterObject.period)) {
-                            alert('Check period!');
                             return [];
                         }
                     }
@@ -118,9 +117,10 @@ var LocalGameStorage = function () {
                 break;
             }
             if (currentPeriod == period) {
-                resultGamesArray.push(JSON.parse(localStorage.getItem(currentId)));
+                resultGamesArray.push(localStorage.getItem(currentId));
             }
         }
+        console.log('[M-LocalGameStorage] getGamesByPeriod():resultGamesArray= ', resultGamesArray);
         return resultGamesArray;
     };
 

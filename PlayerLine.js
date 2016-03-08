@@ -11,4 +11,4 @@ var PlayerLine = function () {
 
 };
 
-module.exports.PlayerLine = PlayerLine;
+module.exports = PlayerLine;
