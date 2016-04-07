@@ -24,6 +24,7 @@ var localStorage = {
             game = JSON.parse(fs.readFileSync(PATH + id + '.json', 'utf8'));
         } catch(err) {
             console.warn('[localStorage-M] getItem error', err);
+            return false;
         }
         console.log('game = ', game);
         return JSON.parse(game);
