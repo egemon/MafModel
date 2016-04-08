@@ -173,7 +173,9 @@ var LocalGameStorage = function () {
     };
 
     this.generateGameId = function (metadata) {
-        return [this.appIdentifier, metadata.date, metadata.gameNumber, metadata.tableName].join('_');
+        var dateObj = new Date(metadata.date);
+        var dateStr = dateObj.toISOString().slice(0,10);
+        return [this.appIdentifier, dateStr, metadata.gameNumber, metadata.table].join('_');
     };
 
     this.createGameInfoObject = function (formArray) {
