@@ -20,7 +20,7 @@ var LocalGameStorage = function () {
         if ( !isGameAlreadyExists
             // || (isGameAlreadyExists && confirm('Do your wanna override game?'))
            ) {
-            localStorage.setItem(id, JSON.stringify(GameRecord));
+            localStorage.setItem(id, GameRecord);
         } else {
             // alert("Game wasn't saved! Please choose another date or number or Table.");
             console.warn('[LGS-M] This game already exists');

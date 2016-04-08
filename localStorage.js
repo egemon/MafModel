@@ -36,9 +36,9 @@ var localStorage = {
         try {
             game = JSON.parse(fs.readFileSync(PATH + id + '.json', 'utf8'));
             console.warn('[localStorage-M] Item already exists! ', id);
-            fs.writeFileSync(PATH + id + '.json', JSON.stringify(str), 'utf8');
+            fs.writeFileSync(PATH + id + '.json', JSON.stringify(str, null, 4), 'utf8');
         } catch(e) {
-            fs.writeFileSync(PATH + id + '.json', JSON.stringify(str), 'utf8');
+            fs.writeFileSync(PATH + id + '.json', JSON.stringify(str, null, 4), 'utf8');
         }
     },
 
