@@ -61,18 +61,14 @@ var LocalGameStorage = function () {
                 return JSON.parse(localStorage.getItem(filterObject.gameId));
 
                 case "periodType":
-                    //if there is no period break
-                    if (!filterObject.period) {
-                        console.warn('[M-LocalGameStorage] getGamesByFilter(): no period or periodType');
-                        return resultGames;
-                    }
+
                     if (filterObject.periodType === 'season' && this.isPeriodIncorrect(filterObject.period)) {
                         filterObject.period = this.seasonMap[filterObject.period];
                         if (this.isPeriodIncorrect(filterObject.period)) {
                             return [];
                         }
                     }
-                    resultGames = this.getGamesByPeriod(filterObject.periodType, filterObject.period);
+                    resultGames = this.getGamesByPeriod(filterObject.periodType, filterObject.period, filterObject.year);
                 break;
                 case "playerNick":
                     resultGames = resultGames ?
@@ -95,27 +91,37 @@ var LocalGameStorage = function () {
     };
 
     //returns array of objects
-    this.getGamesByPeriod = function (periodType, period) {
+    this.getGamesByPeriod = function (periodType, period, year) {
         console.log('[M-LocalGameStorage] getGamesByPeriod(): ', arguments);
+        year = year || (new Date()).getUTCFullYear();
+        period = period || year;
         var resultGamesArray = [];
         for (var i = 0; i < localStorage.length; i++) {
             var currentId = localStorage.key(i);
             if (currentId.indexOf(this.appIdentifier) < 0 ) {
                 continue;
             }
+            var dateArray = currentId.split('_')[1].split('-');
+
+            var currentYear = +dateArray[0];
+            if (currentYear != year) {
+                continue;
+            }
+
             var currentPeriod;
             switch(periodType) {
                 case 'month':
-                    currentPeriod = +currentId.split('_')[1].split('-')[1];
+                    currentPeriod = +dateArray[1];
                 break;
                 //winter is 1, autunmn is 4
                 case 'season':
-                    currentPeriod = parseInt((+currentId.split('_')[1].split('-')[1] % 12) / 3) + 1;
+                    currentPeriod = parseInt((+dateArray[1] % 12) / 3) + 1;
                 break;
                 case 'year':
-                    currentPeriod = +currentId.split('_')[1].split('-')[0];
+                    currentPeriod = currentYear;
                 break;
             }
+
             if (currentPeriod == period) {
                 resultGamesArray.push(localStorage.getItem(currentId));
             }
