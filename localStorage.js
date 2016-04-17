@@ -26,8 +26,7 @@ var localStorage = {
             console.warn('[localStorage-M] getItem error', err);
             return false;
         }
-        console.log('game = ', game);
-        return JSON.parse(game);
+        return game;
     },
 
     setItem: function (id, str) {

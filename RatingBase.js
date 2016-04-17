@@ -9,7 +9,7 @@ var RatingBase = function () {
     console.log('[M-RatingBase] rulesObject = ', this.rulesObject);
     //period, RatingRules, GameRecords-> RatingObject
     this.calculateRating = function (games) {
-        console.log('Rating calculation started with games');
+        console.log('[RatingBase] calculateRating()');
         console.log(games);
         games = this.filterNotCompletedGames(games);
         var RatingObject = {};
@@ -17,14 +17,15 @@ var RatingBase = function () {
             for (var j = 0; j < this.rulesObject.rules.length; j++) {
                 this.applyRuleToRecord(games[i], this.rulesObject.rules[j], RatingObject);
             }
+            console.log('[RatingBase] calculateRating() RatingObject = ', RatingObject);
             for (var k = 0; k < games[i].playerLines.length; k++) {
-                RatingObject[games[i].playerLines[k].name].gameNumber = RatingObject[games[i].playerLines[k].name].gameNumber ?
-                 ++RatingObject[games[i].playerLines[k].name].gameNumber : 1;
+                RatingObject[games[i].playerLines[k].nick].gameNumber = RatingObject[games[i].playerLines[k].nick].gameNumber ?
+                 ++RatingObject[games[i].playerLines[k].nick].gameNumber : 1;
                 if (games[i].playerLines[k].BP) {
-                    RatingObject[games[i].playerLines[k].name].BP = RatingObject[games[i].playerLines[k].name].BP ? ++RatingObject[games[i].playerLines[k].name].BP : 1;
+                    RatingObject[games[i].playerLines[k].nick].BP = RatingObject[games[i].playerLines[k].nick].BP ? ++RatingObject[games[i].playerLines[k].nick].BP : 1;
                 }
                 if (games[i].playerLines[k].BR) {
-                    RatingObject[games[i].playerLines[k].name].BR = RatingObject[games[i].playerLines[k].name].BR ? ++RatingObject[games[i].playerLines[k].name].BR : 1;
+                    RatingObject[games[i].playerLines[k].nick].BR = RatingObject[games[i].playerLines[k].nick].BR ? ++RatingObject[games[i].playerLines[k].nick].BR : 1;
                 }
             }
         }
@@ -35,17 +36,17 @@ var RatingBase = function () {
     };
 
     this.applyRuleToRecord = function (GameRecord, RatingRule, RatingObject) {
-        console.log('[RatingBase] game adding to rating');
+        console.log('[RatingBase] applyRuleToRecord()', arguments);
         var PlayerLines = GameRecord.playerLines;
         if (!RatingRule.condition.metadata || (GameRecord.metadata && this.isMetadataCorrect(GameRecord.metadata, RatingRule.condition.metadata))) {
             for (var i = 0; i < PlayerLines.length; i++) {
                 var player = PlayerLines[i];
                 if (!RatingRule.condition.player || this.isPlayerCorrect(player, RatingRule.condition.player)) {
-                    if (RatingObject[player.name]) {
-                        RatingObject[player.name].sum += RatingRule.value;
+                    if (RatingObject[player.nick]) {
+                        RatingObject[player.nick].sum += RatingRule.value;
                     } else {
-                        RatingObject[player.name] = {};
-                        RatingObject[player.name].sum = RatingRule.value;
+                        RatingObject[player.nick] = {};
+                        RatingObject[player.nick].sum = RatingRule.value;
                     }
                 }
             }
@@ -53,6 +54,8 @@ var RatingBase = function () {
     };
 
     this.isPlayerCorrect = function (player, playerCondition) {
+        // console.log('[RatingBase] isPlayerCorrect()', arguments);
+
         var isTrue = true;
         for(var key in playerCondition){
             var value = playerCondition[key];
@@ -62,6 +65,8 @@ var RatingBase = function () {
     };
 
     this.isMetadataCorrect = function (metadata, ruleMetadata) {
+        // console.log('[RatingBase] isMetadataCorrect()', arguments);
+
         var isTrue = true;
         for(var key in ruleMetadata){
             val = ruleMetadata[key];
@@ -71,13 +76,14 @@ var RatingBase = function () {
     };
 
     this.sortPlayersToArray = function (RatingObject, byString) {
+        console.log('[RatingBase] sortPlayersToArray()', arguments);
         if (byString === 'average') {
             var array = [];
             var value = '';
             var player = {};
             for(var nick in RatingObject){
                 value = RatingObject[nick];
-                value.name = nick;
+                value.nick = nick;
                 array.push(value);
             }
             return array.sort(function(a, b){
@@ -89,15 +95,18 @@ var RatingBase = function () {
     };
 
     this.filterNotCompletedGames = function (games) {
+        console.log('[RatingBase] filterNotCompletedGames()', arguments);
         return games && games.filter(function(game) {
             return this.isGameComplete(game);
         }.bind(this));
     };
 
     this.isGameComplete = function (game) {
+        // console.log('[RatingBase] isGameComplete()', arguments);
+
         var isTrue = true;
         for (var i = 0; i < game.playerLines.length; i++) {
-            isTrue = game.playerLines[i].name && game.playerLines[i].role;
+            isTrue = game.playerLines[i].nick && game.playerLines[i].role;
         }
         return isTrue &&
             game.metadata.date &&

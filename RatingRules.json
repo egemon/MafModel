@@ -3,87 +3,87 @@
         {
             "condition": {
                 "player": {
-                    "role": "r"
+                    "role": "Мирный"
                 },
                 "metadata": {
-                    "win": "city"
+                    "win": "Мирные"
                 }
             },
             "value": 3
         },{
             "condition": {
                 "player": {
-                    "role": "r"
+                    "role": "Мирный"
                 },
                 "metadata": {
-                    "win": "maf"
+                    "win": "Мафия"
                 }
             },
             "value": 0
         },{
             "condition": {
                 "player": {
-                    "role": "s"
+                    "role": "Шериф"
                 },
                 "metadata": {
-                    "win": "city"
+                    "win": "Мирные"
                 }
             },
             "value": 4
         },{
             "condition": {
                 "player": {
-                    "role": "s"
+                    "role": "Шериф"
                 },
                 "metadata": {
-                    "win": "maf"
+                    "win": "Мафия"
                 }
             },
             "value": -1
         },{
             "condition": {
                 "player": {
-                    "role": "b"
+                    "role": "Мафия"
                 },
                 "metadata": {
-                    "win": "city"
+                    "win": "Мирные"
                 }
             },
             "value": 0
         },{
             "condition": {
                 "player": {
-                    "role": "b"
+                    "role": "Мафия"
                 },
                 "metadata": {
-                    "win": "maf"
+                    "win": "Мафия"
                 }
             },
             "value": 4
         },{
             "condition": {
                 "player": {
-                    "role": "d"
+                    "role": "Дон"
                 },
                 "metadata": {
-                    "win": "city"
+                    "win": "Мирные"
                 }
             },
             "value": -1
         },{
             "condition": {
                 "player": {
-                    "role": "d"
+                    "role": "Дон"
                 },
                 "metadata": {
-                    "win": "maf"
+                    "win": "Мафия"
                 }
             },
             "value": 5
         },{
             "condition": {
                 "player": {
-                    "BP": "on"
+                    "BP": true
                 }
             },
             "value": 1
