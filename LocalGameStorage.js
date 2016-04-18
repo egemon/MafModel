@@ -79,7 +79,6 @@ var LocalGameStorage = function () {
                 //prevent console warn
                 break;
                 default:
-                    console.warn('[M-LocalGameStorage] getGamesByFilter(): Wrong filterObject!');
             }
         }
 
