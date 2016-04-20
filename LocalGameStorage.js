@@ -14,7 +14,7 @@ var LocalGameStorage = function () {
 
     //GameRecord - object
     this.saveGame = function (GameRecord) {
-        console.log('[LGS-M] saveGame() game = ', GameRecord);
+        console.log('[LGS-M] saveGame()');
         var id = this.generateGameId(GameRecord.metadata);
         var isGameAlreadyExists = !!localStorage.getItem(id);
         if ( !isGameAlreadyExists
@@ -58,7 +58,7 @@ var LocalGameStorage = function () {
         for (var key in filterObject) {
             switch(key) {
                 case "gameId":
-                return JSON.parse(localStorage.getItem(filterObject.gameId));
+                return localStorage.getItem(filterObject.gameId);
 
                 case "periodType":
 
@@ -153,7 +153,7 @@ var LocalGameStorage = function () {
         for (var i = 0; i < localStorage.length; i++) {
             var key = localStorage.key(i);
             if (key.split('_')[0] === this.appIdentifier) {
-                resultGamesArray.push(JSON.parse(localStorage.getItem(key)));
+                resultGamesArray.push(localStorage.getItem(key));
             }
         }
         return resultGamesArray;

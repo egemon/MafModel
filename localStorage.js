@@ -7,8 +7,8 @@ var localStorage = {
     length: 0,
     keys: [],
     initLocalStorage: function() {
+        console.log('[localStorage] initLocalStorage()', arguments);
         var gameFiles = fs.readdirSync(PATH);
-        console.log('[localStorage-M] init() ');
         this.length = gameFiles.length;
         for (var i = 0; i < gameFiles.length; i++) {
             this.keys[i] = gameFiles[i].replace('.json', '');
@@ -16,6 +16,7 @@ var localStorage = {
     },
 
     init: function () {
+        console.log('[localStorage-M] init() ');
         this.initLocalStorage();
         fs.watch(PATH, {recursive: true}, this.initLocalStorage.bind(this));
     },
