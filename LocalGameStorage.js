@@ -186,6 +186,11 @@ var LocalGameStorage = function () {
         return new GameRecord(formArray);
     };
 
+    this.deleteGame = function (id) {
+        console.log('[LocalGameStorage] deleteGame()', arguments);
+        return localStorage.deleteItem(id);
+    }
+
 };
 
 var singelton = singelton || new LocalGameStorage();

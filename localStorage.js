@@ -45,6 +45,31 @@ var localStorage = {
         }
     },
 
+    deleteItem: function (id) {
+        var promise = {
+            callback: null,
+            resolve: function (data) {
+                if (typeof this.callback === 'function') {
+                    this.callback(data);
+                } else {
+                    console.warn('[dataBase] Promise doesn"t work!');
+                }
+            },
+            when: function (callback) {
+                this.callback = callback;
+            }
+        };
+        fs.unlink(PATH + id + '.json', function (err) {
+            console.log('[localStorage] deleteItem() ', arguments);
+            if (err) {
+                promise.resolve(false);
+            } else {
+                promise.resolve(true);
+            }
+        })
+        return promise;
+    },
+
     key: function (i) {
         // this.init();
         return this.keys[i];
