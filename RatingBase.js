@@ -3,7 +3,7 @@ var Player = require('../model/Player');
 var LocalGameStorage = require('../model/LocalGameStorage');
 var RatingRules = require('../model/RatingRules.json');
 
-console.log('[RatingBase] init:', arguments);
+console.log('[RatingBase] init:');
 var RatingBase = function () {
     this.rulesObject = RatingRules;
     console.log('[M-RatingBase] rulesObject = ', this.rulesObject);

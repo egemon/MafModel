@@ -3,18 +3,22 @@ var fs = require('fs');
 
 var cache = {};
 var PATH = 'data-base/games/';
+
 var localStorage = {
     length: 0,
     keys: [],
-
-    init: function () {
+    initLocalStorage: function() {
         var gameFiles = fs.readdirSync(PATH);
-        console.log('[localStorage-M] init() gameFiles = ', gameFiles);
+        console.log('[localStorage-M] init() ');
         this.length = gameFiles.length;
         for (var i = 0; i < gameFiles.length; i++) {
             this.keys[i] = gameFiles[i].replace('.json', '');
         }
-        console.log('[localStorage-M] init() gameFiles = ', this.keys);
+    },
+
+    init: function () {
+        this.initLocalStorage();
+        fs.watch(PATH, {recursive: true}, this.initLocalStorage.bind(this));
     },
 
     getItem: function (id) {
