@@ -1,5 +1,3 @@
-var PlayerLine = require('../model/PlayerLine');
-var Player = require('../model/Player');
 var LocalGameStorage = require('../model/LocalGameStorage');
 var RatingRules = require('../model/RatingRules.json');
 
@@ -69,7 +67,7 @@ var RatingBase = function () {
 
         var isTrue = true;
         for(var key in ruleMetadata){
-            val = ruleMetadata[key];
+            var val = ruleMetadata[key];
             isTrue = isTrue && metadata[key] === val;
         }
         return isTrue;
@@ -80,7 +78,6 @@ var RatingBase = function () {
         if (byString === 'average') {
             var array = [];
             var value = '';
-            var player = {};
             for(var nick in RatingObject){
                 value = RatingObject[nick];
                 value.nick = nick;

@@ -1,4 +1,3 @@
-var Player  = require('../model/Player');
 var PlayerLine = require('../model/PlayerLine');
 
 var GameRecord = function (dataArray) {
@@ -6,7 +5,7 @@ var GameRecord = function (dataArray) {
 
     this.saveMetaData = function (metadata) {
         this.metadata = {};
-        metadata.forEach(function (el, i) {
+        metadata.forEach(function (el) {
            GameRecordLink.metadata[el.name] = el.value;
         });
     };
@@ -17,7 +16,7 @@ var GameRecord = function (dataArray) {
             this.playerLines.push(new PlayerLine());
         }
 
-        playersData.forEach(function (el, i) {
+        playersData.forEach(function (el) {
             if (!el.value) {return;}
             var nameArray = el.name.split('_');
             var playerNumber = nameArray[0];

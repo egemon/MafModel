@@ -161,9 +161,9 @@ var LocalGameStorage = function () {
 
     this.getPlayersNicks = function () {
         var Nicks = [];
-        this.getAllGames().forEach(function (game, i) {
+        this.getAllGames().forEach(function (game) {
             if (game && game.playerLines) {
-                game.playerLines.forEach(function (player, i) {
+                game.playerLines.forEach(function (player) {
                     if (player.name && !(Nicks.some(function(el){return el == player.name;}))) {
                        Nicks.push(player.name);
                     }

@@ -1,7 +1,6 @@
 var fs = require('fs');
 //TODO timeout+cache
 
-var cache = {};
 var PATH = 'data-base/games/';
 
 var localStorage = {
