@@ -8,7 +8,6 @@ var RatingBase = function () {
     //period, RatingRules, GameRecords-> RatingObject
     this.calculateRating = function (games) {
         console.log('[RatingBase] calculateRating()');
-        console.log(games);
         games = this.filterNotCompletedGames(games);
         var RatingObject = {};
         for (var i = 0; i < games.length; i++) {

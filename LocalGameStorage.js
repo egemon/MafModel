@@ -23,7 +23,8 @@ var LocalGameStorage = function () {
             localStorage.setItem(id, GameRecord);
         } else {
             // alert("Game wasn't saved! Please choose another date or number or Table.");
-            console.warn('[LGS-M] This game already exists');
+            console.warn('[LGS-M] This game already exists and now will be erased');
+            localStorage.setItem(id, GameRecord);
         }
     };
 
@@ -39,7 +40,7 @@ var LocalGameStorage = function () {
     };
 
     // filterObject = {
-    //     gameId: "MT_2015-09-21_1_Baker Street",
+    //     id: "MT_2015-09-21_1_Baker Street",
     //     periodType: "month" || "year" || "season",
     //     period: "1" || "2015" || "4",
     //     playerNick: "Merlin"
@@ -57,8 +58,8 @@ var LocalGameStorage = function () {
 
         for (var key in filterObject) {
             switch(key) {
-                case "gameId":
-                return localStorage.getItem(filterObject.gameId);
+                case "id":
+                return localStorage.getItem(filterObject.id);
 
                 case "periodType":
 
